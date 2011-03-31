@@ -15,14 +15,11 @@ site.addsitedir(os.path.abspath(os.path.join(wsgidir, '../')))
 # manage adds /apps, /lib, and /vendor to the Python path.
 import manage
 
-import django.conf
 import django.core.handlers.wsgi
 import django.core.management
-import django.utils
 
 # Do validate and activate translations like using `./manage.py runserver`.
 # http://blog.dscpl.com.au/2010/03/improved-wsgi-script-for-use-with.html
-django.utils.translation.activate(django.conf.settings.LANGUAGE_CODE)
 utility = django.core.management.ManagementUtility()
 command = utility.fetch_command('runserver')
 command.validate()
@@ -37,7 +34,6 @@ def application(env, start_response):
     if 'HTTP_X_ZEUS_DL_PT' in env:
         env['SCRIPT_URL'] = env['SCRIPT_NAME'] = ''
     env['wsgi.loaded'] = wsgi_loaded
-    env['hostname'] = django.conf.settings.HOSTNAME
     env['datetime'] = str(datetime.now())
     return django_app(env, start_response)
 
