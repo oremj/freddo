@@ -8,7 +8,7 @@ from django.conf import settings
 def run(script):
     return Popen(script, stdout=PIPE, stderr=PIPE, shell=True).communicate()
 
-@task
+@task(ignore_result=True)
 def update_app(name):
     try:
         script = settings.APP_UPDATERS[name]
