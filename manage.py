@@ -27,8 +27,9 @@ for item in list(sys.path):
         sys.path.remove(item)
 sys.path[:0] = new_sys_path
 
-from django.core.management import execute_manager
+from django.core.management import execute_manager, setup_environ
 import settings
+setup_environ(settings)
 
 if __name__ == "__main__":
     execute_manager(settings)
