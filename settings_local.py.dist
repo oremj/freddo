@@ -1,0 +1,10 @@
+BROKER_HOST = ""
+BROKER_PORT = 5672
+BROKER_USER = ""
+BROKER_PASSWORD = ""
+BROKER_VHOST = ""
+CELERY_RESULT_BACKEND = "amqp"
+
+APP_UPDATERS = {
+    'app': '/data/bin/test.sh',
+}

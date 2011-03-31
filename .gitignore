@@ -1,0 +1,4 @@
+settings_local.py
+*.py[co]
+.DS_Store
+vendor
