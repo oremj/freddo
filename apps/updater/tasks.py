@@ -6,7 +6,10 @@ from django.conf import settings
 
 
 def run(script):
-    return Popen(script, stdout=PIPE, stderr=PIPE, shell=True).communicate()
+    p = Popen(script, stdout=PIPE, stderr=PIPE, shell=True)
+    out, err = p.communicate()
+    return p.returncode, out, err
+
 
 @task(ignore_result=True)
 def update_app(name):
