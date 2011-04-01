@@ -23,7 +23,7 @@ def update_app(name, payload):
 
     l = update_app.get_logger()
     l.info("Running: %s" % script)
-    redis.publish('update.%s' % name, payload)
+    redis.publish('update.%s' % name, json.dumps(payload))
     rv = run(script)
     redis.publish('update.%s' % name, json.dumps(rv + (payload,)))
     l.info("Finished updating.")
