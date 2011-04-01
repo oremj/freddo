@@ -145,4 +145,7 @@ LOGGING = {
 import djcelery
 djcelery.setup_loader()
 
+
+REDIS_BACKENDS = {}
+
 from settings_local import *
