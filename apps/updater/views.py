@@ -11,6 +11,6 @@ from . import tasks
 @csrf_exempt
 def update_preview(request, app_name):
     if request.method == 'POST':
-        tasks.update_app.delay(app_name, json.loads(request.raw_post_data))
+        tasks.update_app.delay(app_name, json.loads(request.POST['payload']))
         return HttpResponse('success')
     return HttpResponse('MORE POST')
