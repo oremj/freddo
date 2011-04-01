@@ -8,3 +8,7 @@ CELERY_RESULT_BACKEND = "amqp"
 APP_UPDATERS = {
     'app': '/data/bin/test.sh',
 }
+
+REDIS_BACKENDS = {
+    'master': 'redis://localhost:6379',
+}
