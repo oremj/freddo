@@ -8,5 +8,7 @@ from . import tasks
 @never_cache
 @csrf_exempt
 def update_preview(request, app_name):
-    tasks.update_app.delay(app_name)
-    return HttpResponse('success')
+    if request.method == 'POST':
+        tasks.update_app.delay(app_name)
+        return HttpResponse('success')
+    return HttpResponse('MORE POST')
