@@ -6,7 +6,10 @@ BROKER_VHOST = ""
 CELERY_RESULT_BACKEND = "amqp"
 
 APP_UPDATERS = {
-    'app': '/data/bin/test.sh',
+    'app': {
+        'script': '/data/bin/test.sh', # required
+        'outfile': '/tmp/app.log', # optional: (where to dump stdout/err)
+    },
 }
 
 REDIS_BACKENDS = {
