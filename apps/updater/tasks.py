@@ -21,6 +21,9 @@ def update_app(name, payload):
     except KeyError:
         return
 
+    if 'ref' in app_config and payload['ref'] != app_config['ref']:
+        return
+
     script = app_config['script']
     outfile = app_config.get('outfile')
 
