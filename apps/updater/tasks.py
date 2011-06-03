@@ -22,9 +22,11 @@ def update_app(name, payload):
     except KeyError:
         return
 
+    if 'ref' in app_config and payload['ref'] != app_config['ref']:
+        return
+
     if not lock.acquire(False):
         update_app.retry()
-        return
 
     script = app_config['script']
     outfile = app_config.get('outfile')
