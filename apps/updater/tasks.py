@@ -26,6 +26,7 @@ def update_app(name, payload):
         return
 
     if not lock.acquire(False):
+        redis.publish('update.%s.locked' % name, json.dumps(payload))
         update_app.retry()
 
     script = app_config['script']
