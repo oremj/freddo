@@ -15,10 +15,15 @@ def run(script):
 @task(ignore_result=True)
 def update_app(name, payload):
     redis = redisutils.connections['master']
+    lock = redis.lock('updater.%s' % name, timeout=300)
 
     try:
         app_config = settings.APP_UPDATERS[name]
     except KeyError:
+        return
+
+    if not lock.acquire(False):
+        update_app.retry()
         return
 
     script = app_config['script']
@@ -36,3 +41,4 @@ def update_app(name, payload):
 
     redis.publish('update.%s' % name, json.dumps(rv + (payload,)))
     l.info("Finished updating.")
+    lock.release()
