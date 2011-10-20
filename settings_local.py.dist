@@ -7,6 +7,7 @@ CELERY_RESULT_BACKEND = "amqp"
 
 APP_UPDATERS = {
     'app': {
+        'ref': 'refs/heads/master', # optional: only update if equal to payload['ref']
         'script': '/data/bin/test.sh', # required
         'outfile': '/tmp/app.log', # optional: (where to dump stdout/err)
     },
